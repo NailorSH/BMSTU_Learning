@@ -1,0 +1,18 @@
+#!/usr/bin/python3
+
+import sys
+import os
+
+if (len (sys.argv)) == 1:
+    path = os.getcwd()
+    print(".")
+elif (len (sys.argv)) == 2:
+    path = sys.argv[1]
+    print(path)
+elif (len (sys.argv)) == 3:
+    path, option = sys.argv[2], sys.argv[1]
+    print(path)
+    #print(option)
+
+
+

@@ -1,0 +1,56 @@
+;;HW 1
+
+;; 1
+
+; the formula for calculating
+(define (dayweek_formula day month year)
+  (remainder (+ day
+                (quotient (* 31 month) 12)
+                year
+                (quotient year 4)
+                (* (quotient year 100) -1)
+                (quotient year 400))
+             7))
+
+; to check the month
+(define (сh month)
+  (quotient (- 14 month) 12))
+
+; function
+(define (day-of-week d m y)
+  (dayweek_formula d (+ m (* 12 (сh m)) -2) (- y (сh m))))
+
+
+;; 2
+(define (power b e)
+  (if (= e 1) b
+      (* b (power b (- e 1)))))
+
+(define (signum x1)
+  (if (> x1 0) 1
+      (if (= x1 0) 0 -1)))
+
+(define (square-equation a b c)
+  (case (signum (- (power b 2) (* 4 a c)))
+    ((-1) '())
+    ((0) (list (/ (* b -1) (* 2 a))))
+    ((1) (list
+          (/ (- (* b -1) (sqrt (- (power b 2) (* 4 a c))))  (* 2 a))
+          (/ (+ (* b -1) (sqrt (- (power b 2) (* 4 a c))))  (* 2 a))))))
+
+
+;; 3
+(define (my-gcd a b)
+  (if (= b 0) (abs a)
+      (my-gcd b (remainder a b))))
+
+(define (my-lcm a b)
+  (/ (* a b) (my-gcd a b)))
+
+(define (prime_check n i)
+  (or (= i n)
+      (and (not (eqv? (remainder n i) 0))
+           (prime_check n (+ i 1)))))
+
+(define (prime? n)
+  (if (eqv? n 1) #f (prime_check n 2)))

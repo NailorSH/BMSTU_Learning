@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+import sys
+from module import *
+
+length = int(sys.argv[1])
+number = int(sys.argv[2])
+
+for i in range(number):
+    print(random_string(length))

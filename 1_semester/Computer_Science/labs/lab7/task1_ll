@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cat /dev/null > output.txt > error.txt
+
+cat $1 | while read line; do
+        $line >> output.txt 2>> error.txt
+        sleep "$2""m"
+done

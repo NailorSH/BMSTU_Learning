@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PID=-1
+while true; do
+    if ! ps -p $PID > /dev/null 2>&1; then
+        $1 >> output.txt 2>> error.txt &
+        PID=$!
+        echo "Completed"
+    fi
+    sleep $2m
+done
