@@ -5,21 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a944cda5-8add-4932-9a80-e9915410bac9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Sentences/Sentences.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Sentences/out/production/Sentences/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Sentences/out/production/Sentences/Sentence.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Sentences/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Sentences/src/Sentence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FirstLetterString.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lab3_21.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab1/Factorial.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab1/lab1_report/latex_report_lab1.zip" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab3_report/lab3-PLaM-Shiyatov.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab3_report/latex/images/emblem.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab3_report/latex/images/output.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../lab3_report/latex/lab3-PLaM-Shiyatov.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1678449113209</updated>
-      <workItem from="1678449114393" duration="773000" />
+      <workItem from="1678449114393" duration="1379000" />
     </task>
     <servers />
   </component>
