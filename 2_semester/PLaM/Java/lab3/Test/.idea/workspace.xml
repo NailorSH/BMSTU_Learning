@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a944cda5-8add-4932-9a80-e9915410bac9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../lab3_report/lab3-PLaM-Shiyatov.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lab3_report/latex/images/emblem.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lab3_report/latex/images/output.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../lab3_report/latex/lab3-PLaM-Shiyatov.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a944cda5-8add-4932-9a80-e9915410bac9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
