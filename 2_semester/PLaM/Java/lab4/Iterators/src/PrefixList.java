@@ -11,18 +11,20 @@ class PrefixList implements Iterable<String> {
         this.s = s;
         this.w = w;
         this.indexes = new ArrayList<>();
-        findSubstringIndexes();
     }
 
     private void findSubstringIndexes() {
         int index = s.indexOf(w);
         while (index >= 0) {
+            //System.out.println(index);
             indexes.add(index);
             index = s.indexOf(w, index + 1);
         }
     }
 
     public Iterator<String> iterator() {
+        indexes.clear();
+        findSubstringIndexes();
         return new PrefixIterator();
     }
 
