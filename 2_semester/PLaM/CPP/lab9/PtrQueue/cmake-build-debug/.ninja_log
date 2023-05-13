@@ -1,0 +1,4 @@
+# ninja log v5
+1	359	1682085828347327893	CMakeFiles/PtrQueue.dir/main.cpp.o	a82e6db8732c183
+359	454	1682085828439328245	PtrQueue	c70d7ff346868a17
+1	57	1682085828047326742	CMakeFiles/PtrQueue.dir/PtrQueue.cpp.o	af2eab5597f51c9c

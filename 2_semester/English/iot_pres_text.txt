@@ -1,0 +1,38 @@
+IoT to make our lives easier
+
+
+What is IoT?
+The Internet of Things is a system of interaction between devices (“things”) over the Internet that allows them to exchange data without human intervention.
+These "things" can be anything for smartphones, smartwatches, and smart home appliances, to cars, medical devices, and industrial machinery.
+It is estimated that by 2025, there will be over 40 billion IoT devices worldwide.
+
+If augmented with sensors and actuators, the technology becomes an instance of a more general class of cyber-physical systems, which also encompasses technologies such as smart grids, virtual power plants, smart homes, intelligent transportation and smart cities.
+
+
+Key Concepts of IoT
+Hardware — The heart of IoT is billions of interconnected devices with attached sensors and actuators that sense and control the physical world.
+
+Embedded programming — IoT devices are embedded devices, and may be prototyped using commoditized micro-controller platforms, such as Arduino, with custom printed circuit boards (PCBs) developed at a later stage. Prototyping with these platforms requires circuit design skills, micro-controller programming, and a deep understanding of hardware communication protocols.
+
+Security — Security is one of the most critical concerns in IoT, closely related to data ethics, privacy and liability. It must be built-in at every step of the design of the system.
+
+Network design and management are essential within IoT, due to the sheer volume of connected devices and due to the impact that network design decisions can have at scale. Cloud infrastructure is used for data storage, processing and analysis, as well as for implementation of the business logic of IoT applications.
+
+Data analytics and prediction — The number of IoT devices transmitting data increases on the daily basis, which turns big data into huge data. Developers will need securely and reliably ingest, store, and query the vast quantities of heterogeneous data originating from these devices.
+
+Machine Learning and AI – to be truly intelligent, big data analytics needs to apply cognitive computing techniques drawn from data mining, modeling, statistics, machine learning, and AI. 
+
+
+IoT and Industry
+The impact of IoT on industrial ecosystems has resulted in emergence of robust physical-cyber connectivity, often called the fourth industrial revolution, also known as the Industrial Internet of Things (IIoT). The connected ecosystem encompasses physical connected assets: including those on the manufacturing shop floor as well as the manufactured connected devices such as connected cars or appliances.
+
+
+IoT application areas
+It is applicable in different industries for various purposes: tracking consumer behavior in real time, improving the quality of machines and systems, finding innovative methods of work within the framework of digital transformation, it is used in industry, healthcare, automotive, transportation and logistics, the public sector and in many other areas.
+
+
+Conclusion
+The Internet of Things is changing the way we interact with technology and the world around us, allowing us to be more connected, informed and efficient.
+
+However, as with any new technology, there are risks and challenges that need to be addressed to ensure that the benefits of the Internet of Things are realized without compromising our privacy, security and well-being.
+

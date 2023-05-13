@@ -1,0 +1,4 @@
+/snap/clion/235/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/snap/clion/235/bin/ninja/linux/x64/ninja -G Ninja -S /media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator -B /media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator/cmake-build-debug
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator/cmake-build-debug

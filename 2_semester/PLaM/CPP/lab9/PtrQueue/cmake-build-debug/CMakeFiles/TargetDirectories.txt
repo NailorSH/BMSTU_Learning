@@ -1,0 +1,3 @@
+/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab9/PtrQueue/cmake-build-debug/CMakeFiles/PtrQueue.dir
+/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab9/PtrQueue/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab9/PtrQueue/cmake-build-debug/CMakeFiles/rebuild_cache.dir

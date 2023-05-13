@@ -4,7 +4,8 @@ import java.util.stream.Collectors;
 
 public class Test {
     public static void main(String[] args) {
-        IntegerSequence sequence = new IntegerSequence(Arrays.asList(10, 0, 123, 5, 666));
+        IntegerSequence sequence = new IntegerSequence(Arrays.asList(10, 0, 123, 5, 1));
+        System.out.println("Исходный массив: 10, 0, 123, 5, 1");
 
         // Поток всех цифр
         Map<Integer, Long> digitCount = sequence.getDigitStream()
