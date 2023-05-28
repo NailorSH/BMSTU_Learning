@@ -201,6 +201,7 @@ int main(int argc, char *argv[]) {
         if(showRejected && !rejected.empty())
             aruco::drawDetectedMarkers(imageCopy, rejected, noArray(), Scalar(100, 0, 255));
 
+        imwrite("new_result.jpg", imageCopy);
         imshow("out", imageCopy);
 
         for (int i = 0; i < corners.size(); i++) {
@@ -227,6 +228,8 @@ int main(int argc, char *argv[]) {
         output += "]";
 
         cout << output << endl;
+
+
 
         char key = (char)waitKey(waitTime);
         if(key == 27) break;
