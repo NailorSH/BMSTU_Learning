@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator/cmake-build-debug"
+			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/OpenCV/hw2/Markers detection/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -115,7 +115,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/snap/clion/235/bin/cmake/linux/x64/bin/cmake"
+			"value" : "/snap/clion/237/bin/cmake/linux/x64/bin/cmake"
 		},
 		{
 			"name" : "CMAKE_CPACK_COMMAND",
@@ -127,7 +127,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/snap/clion/235/bin/cmake/linux/x64/bin/cpack"
+			"value" : "/snap/clion/237/bin/cmake/linux/x64/bin/cpack"
 		},
 		{
 			"name" : "CMAKE_CTEST_COMMAND",
@@ -139,7 +139,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/snap/clion/235/bin/cmake/linux/x64/bin/ctest"
+			"value" : "/snap/clion/237/bin/cmake/linux/x64/bin/ctest"
 		},
 		{
 			"name" : "CMAKE_CXX_COMPILER",
@@ -543,7 +543,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/OpenCV/hw2/Markers detection/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -603,7 +603,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator"
+			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/OpenCV/hw2/Markers detection"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -655,7 +655,7 @@
 				}
 			],
 			"type" : "UNINITIALIZED",
-			"value" : "/snap/clion/235/bin/ninja/linux/x64/ninja"
+			"value" : "/snap/clion/237/bin/ninja/linux/x64/ninja"
 		},
 		{
 			"name" : "CMAKE_MODULE_LINKER_FLAGS",
@@ -843,7 +843,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "FractionIterator"
+			"value" : "test"
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -887,7 +887,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/snap/clion/235/bin/cmake/linux/x64/share/cmake-3.25"
+			"value" : "/snap/clion/237/bin/cmake/linux/x64/share/cmake-3.25"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1126,40 +1126,28 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "FractionIterator_BINARY_DIR",
+			"name" : "FIND_PACKAGE_MESSAGE_DETAILS_OpenCV",
 			"properties" : 
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
+					"value" : "Details about finding OpenCV"
 				}
 			],
-			"type" : "STATIC",
-			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator/cmake-build-debug"
+			"type" : "INTERNAL",
+			"value" : "[/usr/local][v4.7.0()]"
 		},
 		{
-			"name" : "FractionIterator_IS_TOP_LEVEL",
+			"name" : "OpenCV_DIR",
 			"properties" : 
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
+					"value" : "The directory containing a CMake configuration file for OpenCV."
 				}
 			],
-			"type" : "STATIC",
-			"value" : "ON"
-		},
-		{
-			"name" : "FractionIterator_SOURCE_DIR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/CPP/lab10/FractionIterator"
+			"type" : "PATH",
+			"value" : "/usr/local/lib/cmake/opencv4"
 		},
 		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
@@ -1172,6 +1160,42 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "TRUE"
+		},
+		{
+			"name" : "test_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/OpenCV/hw2/Markers detection/cmake-build-debug"
+		},
+		{
+			"name" : "test_IS_TOP_LEVEL",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "ON"
+		},
+		{
+			"name" : "test_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "/media/hdd/Education/Univer/Learning/2_semester/PLaM/OpenCV/hw2/Markers detection"
 		}
 	],
 	"kind" : "cache",
