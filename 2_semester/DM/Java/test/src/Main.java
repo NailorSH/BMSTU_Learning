@@ -1,62 +1,210 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
 
-class Tile {
-    int cost;
-    int dist;
+class State {
+    int i;
+    State parent;
+    int depth;
+    boolean marked;
+    State[] trans;
+    String[] outs;
 
-    Tile(int cost) {
-        this.cost = cost;
-        this.dist = 1000000;
+    State(int i, State parent, int depth, boolean marked, int m) {
+        this.i = i;
+        this.parent = parent;
+        this.depth = depth;
+        this.marked = marked;
+        this.trans = new State[m];
+        this.outs = new String[m];
     }
 }
 
-class Point {
-    int x;
-    int y;
+class Main {
+    static int n, m, q0, num;
 
-    Point(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
-public class Main {
     public static void main(String[] args) {
+        num = 0;
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
+        n = scanner.nextInt();
+        m = scanner.nextInt();
+        q0 = scanner.nextInt();
 
-        Tile[][] mat = new Tile[n][n];
+        State[] automat = new State[n];
         for (int i = 0; i < n; i++) {
-            mat[i] = new Tile[n];
-            for (int j = 0; j < n; j++) {
-                int cost = scanner.nextInt();
-                mat[i][j] = new Tile(cost);
+            automat[i] = new State(i, null, 0, false, m);
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                int t = scanner.nextInt();
+                automat[i].trans[j] = automat[t];
             }
         }
 
-        PriorityQueue<Point> queue = new PriorityQueue<>(Comparator.comparingDouble(p -> mat[p.x][p.y].dist));
-        mat[0][0].dist = mat[0][0].cost;
-        queue.offer(new Point(0, 0));
-        Point[] shifts = new Point[4];
-        shifts[0] = new Point(0, 1);
-        shifts[1] = new Point(0, -1);
-        shifts[2] = new Point(1, 0);
-        shifts[3] = new Point(-1, 0);
-        while (!queue.isEmpty()) {
-            Point point = queue.poll();
-            for (Point shift : shifts) {
-                int x = point.x + shift.x;
-                int y = point.y + shift.y;
-                if (x < 0 || y < 0 || x >= n || y >= n) {
-                    continue;
-                }
-                if (mat[x][y].dist > mat[point.x][point.y].dist + mat[x][y].cost) {
-                    mat[x][y].dist = mat[point.x][point.y].dist + mat[x][y].cost;
-                    queue.offer(new Point(x, y));
-                }
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                String s = scanner.next();
+                automat[i].outs[j] = s;
             }
         }
 
-        System.out.println(mat[n - 1][n - 1].dist);
+        List<State> min_automat = AufenkampHohn(automat);
+
+        for (State q : min_automat) {
+            boolean fl = true;
+            for (int i = 0; i < m; i++) {
+                if (!q.outs[i].equals(automat[q0].outs[i])) {
+                    fl = false;
+                    break;
+                }
+            }
+            if (fl) {
+                DFS(q);
+                break;
+            }
+        }
+
+        min_automat.sort(Comparator.comparingInt(a -> a.i));
+
+        System.out.println("digraph {");
+        System.out.println("    rankdir = LR");
+        for (State q : min_automat) {
+            for (int i = 0; i < m; i++) {
+                System.out.printf("    %d -> %d [label = \"%s(%s)\"]%n", q.i, q.trans[i].i, (char) (i + 97), );
+            }
+        }
+        System.out.println("}");
+    }
+
+    static void DFS(State s) {
+        s.i = num;
+        num++;
+        s.marked = true;
+
+        for (int i = 0; i < m; i++) {
+            if (!s.trans[i].marked) {
+                DFS(s.trans[i]);
+            }
+        }
+    }
+
+    static void Union(State x, State y) {
+        State root_x = Find(x);
+        State root_y = Find(y);
+        if (root_x.depth < root_y.depth) {
+            root_x.parent = root_y;
+        } else {
+            root_y.parent = root_x;
+            if (root_x.depth == root_y.depth && root_x != root_y) {
+                root_x.depth++;
+            }
+        }
+    }
+
+    static State Find(State x) {
+        if (x.parent == x) {
+            return x;
+        } else {
+            x.parent = Find(x.parent);
+            return Find(x.parent);
+        }
+    }
+
+    static void Split1(State[] automat, int mt, State[] pi) {
+        for (State q : automat) {
+            q.parent = q;
+            q.depth = 0;
+        }
+        mt = n;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (Find(automat[i]) != Find(automat[j])) {
+                    boolean eq = true;
+                    for (int c = 0; c < m; c++) {
+                        if (!automat[i].outs[c].equals(automat[j].outs[c])) {
+                            eq = false;
+                            break;
+                        }
+                    }
+                    if (eq) {
+                        Union(automat[i], automat[j]);
+                        mt--;
+                    }
+                }
+            }
+        }
+        for (State q : automat) {
+            pi[q.i] = Find(q);
+        }
+    }
+
+    static void Split(State[] automat, int mt, State[] pi) {
+        for (State q : automat) {
+            q.parent = q;
+            q.depth = 0;
+        }
+        mt = n;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (pi[automat[i].i] == pi[automat[j].i] && Find(automat[i]) != Find(automat[j])) {
+                    boolean eq = true;
+                    for (int c = 0; c < m; c++) {
+                        State w1 = automat[i].trans[c];
+                        State w2 = automat[j].trans[c];
+                        if (pi[w1.i] != pi[w2.i]) {
+                            eq = false;
+                            break;
+                        }
+                    }
+                    if (eq) {
+                        Union(automat[i], automat[j]);
+                        mt--;
+                    }
+                }
+            }
+        }
+        for (State q : automat) {
+            pi[q.i] = Find(q);
+        }
+    }
+
+    static List<State> AufenkampHohn(State[] automat) {
+        int m1 = 0;
+        State[] pi = new State[n];
+        Split1(automat, m1, pi);
+
+        while (true) {
+            int m2 = 0;
+            Split(automat, m2, pi);
+            if (m1 == m2) {
+                break;
+            }
+            m1 = m2;
+        }
+
+        List<State> ans = new ArrayList<>();
+
+        for (State q : automat) {
+            State qt = pi[q.i];
+            if (!find(ans, qt)) {
+                ans.add(qt);
+                for (int i = 0; i < m; i++) {
+                    qt.trans[i] = pi[q.trans[i].i];
+                    qt.outs[i] = q.outs[i];
+                }
+            }
+        }
+        return ans;
+    }
+
+    static boolean find(List<State> automat, State q) {
+        for (State s : automat) {
+            if (s == q) {
+                return true;
+            }
+        }
+        return false;
     }
 }
