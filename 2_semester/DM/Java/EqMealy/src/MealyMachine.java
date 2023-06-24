@@ -49,13 +49,13 @@ public class MealyMachine {
             for (int i = 0; i < firstMinMealy.size(); i++) {
                 for (int j = 0; j < inputAlphabetSize; j++) {
                     if (firstMinMealy.get(i).trans[j].i != secondMinMealy.get(i).trans[j].i ||
-                            firstMinMealy.get(i).outs[j].equals(secondMinMealy.get(i).outs[j])) {
-                        return true;
+                            !firstMinMealy.get(i).outs[j].equals(secondMinMealy.get(i).outs[j])) {
+                        return false;
                     }
                 }
             }
         }
-        return false;
+        return true;
     }
 
     public String getMinMealyDOT() {
