@@ -1,48 +1,76 @@
 package main
 
-import (
-    "bufio"
-    "fmt"
-    "os"
-    "sort"
-)
+import "fmt"
 
-func dividers(n int) (divs []int) {
-    for i := 1; i*i <= n; i++ {
-        if n%i == 0 {
-            divs = append(divs, i)
-            if i*i != n {
-                divs = append(divs, n/i)
-            }
-        }
-    }
-    sort.Sort(sort.IntSlice(divs))
-    return
+type pair struct {
+    q int
+    y string
 }
 
-func primereminder(a, b int) bool {
-    c := a / b
-    arr := dividers(c)
-    return len(arr) == 2
+type Mealy struct{
+    N, K, M, q int
+    In, Out [] string
+    D [][]int
+    F [][]string
 }
 
 func main() {
-    bufstdin := bufio.NewReader(os.Stdin)
-    var n int
-    fmt.Fscan(bufstdin, &n)
-    if n == 1 {
-        fmt.Printf("graph {\n1\n}\n")
-        return
+    machine := &Mealy{}
+
+    fmt.Scan(&machine.M)
+    machine.In = make([]string, machine.M)
+    for i := 0; i < machine.M; i++ {
+        fmt.Scan(&machine.In[i])
     }
-    primedivs := dividers(n)
-    fmt.Printf("graph {\n")
-    for i, x := range primedivs {
-        fmt.Printf("\t%d\n", x)
-        for j := 0; j < i; j++ {
-            if x%primedivs[j] == 0 && primereminder(x, primedivs[j]) {
-                fmt.Printf("\t%d -- %d\n", x, primedivs[j])
+    fmt.Scan(&machine.K)
+    machine.Out = make([]string, machine.K)
+    for i := 0; i < machine.K; i++ {
+        fmt.Scan(&machine.Out[i])
+    }
+    fmt.Scan(&machine.N)
+
+    machine.D = make([][]int, machine.N)
+    machine.F = make([][]string, machine.N)
+
+    for i := 0; i < machine.N; i++ {
+
+        machine.D[i] = make([] int, machine.M)
+        for j := 0; j < machine.M; j++ {
+            fmt.Scan(&machine.D[i][j])
+        }
+    }
+    for i := 0; i < machine.N; i++ {
+        machine.F[i] = make([] string, machine.M)
+        for j := 0; j < machine.M; j++ {
+            fmt.Scan(&machine.F[i][j])
+        }
+    }
+
+    assoc := make(map[pair]pair, machine.M*machine.N)
+
+    fmt.Printf("digraph {\n" + "    rankdir = LR\n")
+
+    k := 0
+    for i2 := 0; i2 < machine.N; i2++ {
+        for j2, _ := range machine.In {
+            i, j := machine.D[i2][j2], machine.F[i2][j2]
+            if _, fl := assoc[pair{i, j}]; !fl{
+                fmt.Printf("    %d [label = \"(%d,%s)\"]\n", k, i, j)
+                assoc[pair{i, j}] = pair{k, "yes'n"}
+                k++
             }
         }
     }
-    fmt.Printf("}\n")
+    for i := 0; i < machine.N; i++ {
+        for _, j := range machine.Out {
+            if msg, _ := assoc[pair{i, j}]; msg.y == "yes'n" {
+                for m, l := range machine.In {
+                    fmt.Printf("    %d -> %d [label = \"%s\"]\n", assoc[pair{i, j}].q, assoc[pair{machine.D[i][m], machine.F[i][m]}].q, l)
+                }
+                assoc[pair{i, j}] = pair{assoc[pair{i, j}].q, "yep"}
+            }
+        }
+    }
+    fmt.Println("}")
+
 }
