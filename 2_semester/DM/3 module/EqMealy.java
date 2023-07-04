@@ -1,0 +1,292 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+public class EqMealy {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n1 = scanner.nextInt();
+        int m1 = scanner.nextInt();
+        int q01 = scanner.nextInt();
+
+        MealyMachine firstMachine = new MealyMachine(n1, m1, q01);
+        firstMachine.readTransitionMatrix(scanner);
+        firstMachine.readOutputsMatrix(scanner);
+
+        int n2 = scanner.nextInt();
+        int m2 = scanner.nextInt();
+        int q02 = scanner.nextInt();
+
+        MealyMachine secondMachine = new MealyMachine(n2, m2, q02);
+        secondMachine.readTransitionMatrix(scanner);
+        secondMachine.readOutputsMatrix(scanner);
+        scanner.close();
+
+        if(firstMachine.isEqual(secondMachine)) {
+            System.out.println("EQUAL");
+        } else {
+            System.out.println("NOT EQUAL");
+        }
+
+    }
+}
+
+class MealyMachine {
+    int statesNumber;
+    int inputAlphabetSize;
+    int initialStateNumber;
+    State[] Q;
+    private int num;
+
+    public MealyMachine(int n, int m, int q0) {
+        statesNumber = n;
+        inputAlphabetSize = m;
+        initialStateNumber = q0;
+
+        Q = new State[n];
+        for (int i = 0; i < n; i++) {
+            Q[i] = new State(i, m);
+        }
+    }
+
+    public void readTransitionMatrix(Scanner scanner) {
+        for (int i = 0; i < statesNumber; i++) {
+            for (int j = 0; j < inputAlphabetSize; j++) {
+                int t = scanner.nextInt();
+                Q[i].trans[j] = Q[t];
+            }
+        }
+    }
+
+    public void readOutputsMatrix(Scanner scanner) {
+        for (int i = 0; i < statesNumber; i++) {
+            for (int j = 0; j < inputAlphabetSize; j++) {
+                String s = scanner.next();
+                Q[i].outs[j] = s;
+            }
+        }
+    }
+
+    public boolean isEqual(MealyMachine other) {
+        List<State> firstMinMealy = this.getMinMealy();
+        List<State> secondMinMealy = other.getMinMealy();
+        if (firstMinMealy.size() != secondMinMealy.size()
+                || inputAlphabetSize != other.inputAlphabetSize) {
+            return false;
+        } else {
+            for (int i = 0; i < firstMinMealy.size(); i++) {
+                for (int j = 0; j < inputAlphabetSize; j++) {
+                    if (firstMinMealy.get(i).trans[j].i != secondMinMealy.get(i).trans[j].i ||
+                            !firstMinMealy.get(i).outs[j].equals(secondMinMealy.get(i).outs[j])) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public String getMinMealyDOT() {
+        return buildGraphDOT(getMinMealy());
+    }
+
+    public List<State> getMinMealy() {
+        num = 0;
+        List<State> min_machine = AufenkampHohn(Q);
+        for (State q : min_machine) {
+            boolean fl = true;
+            for (int i = 0; i < inputAlphabetSize; i++) {
+                if (!q.outs[i].equals(Q[initialStateNumber].outs[i])) {
+                    fl = false;
+                    break;
+                }
+            }
+            if (fl) {
+                DFS(q);
+                break;
+            }
+        }
+
+        min_machine.sort(Comparator.comparingInt(a -> a.i));
+        return min_machine;
+    }
+
+    private String buildGraphDOT(List<State> min_machine) {
+        StringBuilder result = new StringBuilder("digraph {\n");
+        result.append("    rankdir = LR\n");
+        for (State q : min_machine) {
+            for (int i = 0; i < inputAlphabetSize; i++) {
+                result.append("    ")
+                        .append(q.i)
+                        .append(" -> ")
+                        .append(q.trans[i].i)
+                        .append(" [label = \"")
+                        .append((char) (i + 97))
+                        .append("(")
+                        .append(q.outs[i])
+                        .append(")\"]\n");
+            }
+        }
+        result.append("}");
+        return String.valueOf(result);
+    }
+
+    private void DFS(State s) {
+        s.i = num;
+        num++;
+        s.marked = true;
+
+        for (int i = 0; i < inputAlphabetSize; i++) {
+            if (!s.trans[i].marked) {
+                DFS(s.trans[i]);
+            }
+        }
+    }
+
+    private List<State> AufenkampHohn(State[] machine) {
+        int m1 = 0;
+        State[] pi = new State[statesNumber];
+        Split1(machine, pi);
+
+        while (true) {
+            int m2 = 0;
+            Split(machine, pi);
+            if (m1 == m2) {
+                break;
+            }
+            m1 = m2;
+        }
+
+        List<State> ans = new ArrayList<>();
+
+        for (State q : machine) {
+            State qt = pi[q.i];
+            if (!isContained(ans, qt)) {
+                ans.add(qt);
+                for (int i = 0; i < inputAlphabetSize; i++) {
+                    qt.trans[i] = pi[q.trans[i].i];
+                    qt.outs[i] = q.outs[i];
+                }
+            }
+        }
+        return ans;
+    }
+
+    private void Split1(State[] machine, State[] pi) {
+        for (State q : machine) {
+            q.parent = q;
+            q.depth = 0;
+        }
+        for (int i = 0; i < statesNumber - 1; i++) {
+            for (int j = i + 1; j < statesNumber; j++) {
+                if (Find(machine[i]) != Find(machine[j])) {
+                    boolean eq = true;
+                    for (int c = 0; c < inputAlphabetSize; c++) {
+                        if (!machine[i].outs[c].equals(machine[j].outs[c])) {
+                            eq = false;
+                            break;
+                        }
+                    }
+                    if (eq) {
+                        Union(machine[i], machine[j]);
+                    }
+                }
+            }
+        }
+        for (State q : machine) {
+            pi[q.i] = Find(q);
+        }
+    }
+
+    private void Split(State[] machine, State[] pi) {
+        for (State q : machine) {
+            q.parent = q;
+            q.depth = 0;
+        }
+        for (int i = 0; i < statesNumber - 1; i++) {
+            for (int j = i + 1; j < statesNumber; j++) {
+                if (pi[machine[i].i] == pi[machine[j].i] && Find(machine[i]) != Find(machine[j])) {
+                    boolean eq = true;
+                    for (int c = 0; c < inputAlphabetSize; c++) {
+                        State w1 = machine[i].trans[c];
+                        State w2 = machine[j].trans[c];
+                        if (pi[w1.i] != pi[w2.i]) {
+                            eq = false;
+                            break;
+                        }
+                    }
+                    if (eq) {
+                        Union(machine[i], machine[j]);
+                    }
+                }
+            }
+        }
+        for (State q : machine) {
+            pi[q.i] = Find(q);
+        }
+    }
+
+    private void Union(State x, State y) {
+        State root_x = Find(x);
+        State root_y = Find(y);
+        if (root_x.depth < root_y.depth) {
+            root_x.parent = root_y;
+        } else {
+            root_y.parent = root_x;
+            if (root_x.depth == root_y.depth && root_x != root_y) {
+                root_x.depth++;
+            }
+        }
+    }
+
+    private State Find(State x) {
+        if (x.parent == x) {
+            return x;
+        } else {
+            x.parent = Find(x.parent);
+            return Find(x.parent);
+        }
+    }
+
+    private boolean isContained(List<State> machine, State q) {
+        for (State s : machine) {
+            if (s == q) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+class State implements Comparable<State> {
+    int i;
+    State parent;
+    int depth;
+    boolean marked;
+    State[] trans;
+    String[] outs;
+
+    State(int i, int m) {
+        this.i = i;
+        this.parent = null;
+        this.depth = 0;
+        this.marked = false;
+        this.trans = new State[m];
+        this.outs = new String[m];
+    }
+
+    State(int i, State parent, int depth, boolean marked, int m) {
+        this.i = i;
+        this.parent = parent;
+        this.depth = depth;
+        this.marked = marked;
+        this.trans = new State[m];
+        this.outs = new String[m];
+    }
+
+    @Override
+    public int compareTo(State other) {
+        return Integer.compare(this.i, other.i);
+    }
+}
