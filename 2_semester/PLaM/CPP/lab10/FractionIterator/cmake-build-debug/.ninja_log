@@ -1,5 +1,5 @@
 # ninja log v5
 1	283	1683999184083788080	CMakeFiles/FractionIterator.dir/main.cpp.o	8af44f1217b1fc24
-0	23	1685115537830490525	build.ninja	b7ab51c4a57bcca5
+0	23	1694026184340420635	build.ninja	b7ab51c4a57bcca5
 283	332	1683999184131782289	FractionIterator	6cbff5b580e10e21
 1	234	1683999184035793871	CMakeFiles/FractionIterator.dir/FractionSequence.cpp.o	a522c22f045a008
